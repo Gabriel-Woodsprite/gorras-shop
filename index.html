@@ -1,0 +1,73 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda de Gorras</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/products.js"></script>
+    <link rel="stylesheet" href="css/StylePro.css" />
+    <script defer src="js/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+      <nav class="navbar">
+        <a href="index.html">Inicio</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#contacto">Contacto</a>
+        <div id="cart-icon" title="Ver carrito">
+          🛒<span id="cart-count">0</span>
+        </div>
+      </nav>
+    </header>
+    <section class="yepyep">
+      <div class="superlogo"></div>
+      <div class="mini">
+        <h1>Permítete ir un paso adelante. <br /></h1>
+        <p>Elige una gorra que exprese tu esencia.</p>
+      </div>
+    </section>
+
+    <div id="message" class="message hidden"></div>
+
+    <main id="product-list" class="catalog"></main>
+
+    <template id="product-template">
+      <div class="product">
+        <img src="" alt="" class="product-img" />
+        <div class="product-info">
+          <h3 class="product-name"></h3>
+          <p class="product-price"></p>
+          <button class="btn view-btn">Ver detalles</button>
+          <button class="btn add-btn" title="Agregar al carrito">🛒</button>
+        </div>
+      </div>
+    </template>
+    <footer>
+      <p>&copy; 2025 Spartans Caps - Todos los derechos reservados</p>
+      <div class="footer-links">
+        <a href="#">Política de privacidad</a>
+        <a href="#">Términos de uso</a>
+        <a href="#">Ayuda</a>
+        <a href="#">Contacto</a>
+      </div>
+      <p>
+        Síguenos en redes:
+        <a href="https://www.facebook.com/share/1azfEzXhBw/">Facebook</a> ·
+        <a
+          href="https://www.instagram.com/spartans_caps_?igsh=MTh5ZWx1a3pwZDdrcw=="
+          >Instagram</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,92 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Carrito de Compras</title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+			rel="stylesheet" />
+	</head>
+	<body>
+		<header>
+			<h1>Carrito de Compras</h1>
+		</header>
+
+		<main class="cart-page">
+			<div id="cart-container"></div>
+			<div class="cart-summary">
+				<p><strong>Total:</strong> <span id="total-price">$0.00</span></p>
+				<button class="btn">Realizar compra</button>
+			</div>
+		</main>
+
+		<script>
+			let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+			function renderCart() {
+				const container = document.getElementById("cart-container");
+				container.innerHTML = "";
+				let total = 0;
+
+				if (cart.length === 0) {
+					container.innerHTML = "<p>Tu carrito está vacío.</p>";
+					document.getElementById("total-price").textContent = "$0.00";
+					return;
+				}
+
+				cart.forEach((item, index) => {
+					const subtotal = item.quantity * item.price;
+					total += subtotal;
+
+					const div = document.createElement("div");
+					div.className = "cart-item";
+					div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="cart-thumb" />
+          <div class="cart-details">
+            <h3>${item.name}</h3>
+            <p>Precio: $${item.price}</p>
+            <label>Cantidad: <input type="number" min="1" value="${
+							item.quantity
+						}" data-index="${index}" class="qty-input"></label>
+            <p>Subtotal: $<span class="subtotal">${subtotal.toFixed(
+							2,
+						)}</span></p>
+            <button class="btn btn-remove" data-index="${index}">Eliminar</button>
+          </div>
+        `;
+					container.appendChild(div);
+				});
+
+				document.getElementById("total-price").textContent = `$${total.toFixed(
+					2,
+				)}`;
+
+				document.querySelectorAll(".qty-input").forEach(input => {
+					input.addEventListener("input", e => {
+						const idx = e.target.dataset.index;
+						const newQty = Math.max(1, parseInt(e.target.value));
+						cart[idx].quantity = newQty;
+						localStorage.setItem("cart", JSON.stringify(cart));
+						renderCart();
+					});
+				});
+
+				document.querySelectorAll(".btn-remove").forEach(btn => {
+					btn.addEventListener("click", e => {
+						const idx = e.target.dataset.index;
+						cart.splice(idx, 1);
+						localStorage.setItem("cart", JSON.stringify(cart));
+						renderCart();
+					});
+				});
+			}
+
+			renderCart();
+		</script>
+	</body>
+</html>
